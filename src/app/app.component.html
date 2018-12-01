@@ -1,0 +1,209 @@
+{{myFirstForm.value | json}}
+<ng-container [formGroup]="myFirstForm">
+  <div>
+    <div>
+      OrgID:
+    </div>
+    <input type="text" formControlName="OrgId">
+  </div>
+  <div>
+    <div>
+      DataProviderType:
+    </div>
+    <input type="text" formControlName="DataProviderType">
+  </div>
+  <div>
+    <div>
+      DataProviderMode:
+    </div>
+    <input type="text" formControlName="DataProviderMode">
+  </div>
+  <div>
+    <div>
+      DataSourceId:
+    </div>
+    <input type="text" formControlName="DataSourceId">
+  </div>
+  <br>
+  <ng-container formGroupName="WriterSetting">
+    <h2>Writer Setting</h2>
+    <div>
+    <div>
+      RelativeFolderPath:
+    </div>
+    <input type="text" formControlName="RelativeFolderPath">
+    </div>
+  
+    <ng-container formArrayName="File">
+      File:
+      <ng-container *ngFor= "let filePattern of myFirstForm.controls.WriterSetting.controls.File.controls; let patternIndex=index" [formGroupName]="patternIndex">
+      <div>
+        <div>
+          FileNamePattern:
+        </div>
+        <input type="text" formControlName="FileNamePattern">
+      </div>
+      <button (click)="addFilePattern(myFirstForm.controls.WriterSetting.controls.File,patternIndex+1)">Add Pattern</button>
+      <button (click)="removeFilePattern(myFirstForm.controls.WriterSetting.controls.File,patternIndex)">Remove Pattern</button>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+  <br>
+  <br>
+  <ng-container formGroupName="ProcessorSettings">
+    <h2>Processor Setting</h2>
+    <div>
+      FileType:
+      <div>
+      <input type="text" formControlName="FileType">
+      </div>
+    </div>
+    <div>
+      Delimiter:
+      <div>
+      <input type="text" formControlName="Delimiter">
+      </div>
+    </div>
+    <div>
+      IncludeHeaders:
+      <div>
+      <input type="text" formControlName="IncludeHeaders">
+      </div>
+    </div>
+    <ng-container formArrayName="Fields">
+     <h3>Fields</h3>
+     <br>
+      <ng-container *ngFor="let field of myFirstForm.controls.ProcessorSettings.controls.Fields.controls; let fieldsIndex = index" [formGroupName]= "fieldsIndex">
+        
+       <br>
+       <strong>Field {{fieldsIndex+1}} </strong>
+      <div>
+      Width:
+      <div>
+      <input type="text" formControlName="Width">
+      </div>
+    </div>
+    <div>
+      TargetName:
+      <div>
+      <input type="text" formControlName="TargetName">
+      </div>
+    </div>
+    <div>
+      FieldType:
+      <div>
+      <input type="text" formControlName="FieldType">
+      </div>
+    </div>
+    <div>
+      SourceName:
+      <div>
+      <input type="text" formControlName="SourceName">
+      </div>
+    </div>
+    
+      <br>
+     <ng-container formArrayName="Rules">
+      <b>Rules:</b>
+    <ng-container *ngFor="let rule of myFirstForm.controls.ProcessorSettings.controls.Fields.controls[fieldsIndex].controls.Rules.controls; let rulesIndex = index" [formGroupName]= "rulesIndex">
+      <div>
+      Type:
+      <div>
+      <input type="text" formControlName="Type">
+      </div>
+      </div>
+      <div>
+      Find:
+      <div>
+      <input type="text" formControlName="Find">
+      </div>
+      </div>
+      <div>
+      Replace:
+      <div>
+      <input type="text" formControlName="Replace">
+      </div>
+      </div>
+      <div>
+      Prefix:
+      <div>
+      <input type="text" formControlName="Prefix">
+      </div>
+      </div>
+      <button (click)="addRules(myFirstForm.controls.ProcessorSettings.controls.Fields.controls[fieldsIndex].controls.Rules,rulesIndex+1)">Add Rules</button>
+      <button (click)="deleteRules(myFirstForm.controls.ProcessorSettings.controls.Fields.controls[fieldsIndex].controls.Rules,rulesIndex)">Delete Rules</button>
+    </ng-container>
+    </ng-container> 
+    <br>
+    <br>
+    <button (click)="addFields(myFirstForm.controls.ProcessorSettings.controls.Fields,fieldsIndex+1)">Add Fields</button>
+      <button (click)="deleteFields(myFirstForm.controls.ProcessorSettings.controls.Fields,fieldsIndex)">Delete Fields</button>
+      <br>
+     
+      </ng-container>
+    </ng-container>
+    
+  </ng-container>
+
+
+
+  <br>
+  <br>
+  <div>
+      Name:
+      <div>
+      <input type="text" formControlName="Name">
+      </div>
+  </div>
+  <div>
+      ProcessType:
+      <div>
+      <input type="text" formControlName="ProcessType">
+      </div>
+  </div>
+  <div>
+      IsEnabled:
+      <div>
+      <input type="text" formControlName="IsEnabled">
+      </div>
+  </div>
+  <div>
+      SkipFilter:
+      <div>
+      <input type="text" formControlName="SkipFilter">
+      </div>
+  </div>
+  <div>
+      SkipProcessor:
+      <div>
+      <input type="text" formControlName="SkipProcessor">
+      </div>
+  </div>
+  <div>
+      SkipWriter:
+      <div>
+      <input type="text" formControlName="SkipWriter">
+      </div>
+  </div>
+  <div>
+      SkipEncryption:
+      <div>
+      <input type="text" formControlName="SkipEncryption">
+      </div>
+  </div>
+  <div>
+      SkipDelivery:
+      <div>
+      <input type="text" formControlName="SkipDelivery">
+      </div>
+  </div>
+  <div>
+      Schedule:
+      <div>
+      <input type="text" formControlName="Schedule">
+      </div>
+  </div>
+
+
+
+</ng-container>
